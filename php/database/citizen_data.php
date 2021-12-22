@@ -84,7 +84,6 @@ class Citizen extends Database
         $query = "INSERT INTO `citizen` (`citizen_id`, `name`, `birth`, `gender`, `identifier`, `address_id`, `permanent_address_id`, 
         `temp_address_id`, `religion`, `education`, `job`, `report_id`, `user_id`) VALUES (NULL, '$name', '$birth', 
         '$gender', '$identifier', '$address_id', '$permanent_address_id', '$temp_address_id', '$religion', '$education', '$job', $report_id, $user_id)";
-        echo $query;
         return $this->connect->query($query);
     }
 

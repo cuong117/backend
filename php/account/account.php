@@ -25,8 +25,7 @@ function add_account()
 {
     require_once('database/account_data.php');
     $res = new stdClass();
-    $user_exits = array();
-    $non_user = false;
+    $user_exits = false;
     $success = true;
     if (
         array_key_exists('user_id', $_POST) &&
@@ -40,15 +39,13 @@ function add_account()
                     $success = false;
             } else {
                 $success = false;
-                array_push($user_exits, $_POST['account']);
+                $user_exits = true;
             }
         } else {
             $success = false;
-            $non_user = true;
         }
 
         $res->success = $success;
-        $res->non_user = $non_user;
         $res->user_exits = $user_exits;
 
         return $res;
@@ -64,12 +61,14 @@ function first_login()
         array_key_exists('password', $_POST) &&
         array_key_exists('name', $_POST)
     ) {
-        $result = $account_data->change_first_login($_POST['user_id'], $_POST['name'], $_POST['password']);
-        if ($result) {
-            $res->status = 'ok';
-        } else
-            $res->status = "fail";
-        return $res;
+        if (trim($_POST['user_id']) && trim($_POST['password']) && trim($_POST['name'])) {
+            $result = $account_data->change_first_login($_POST['user_id'], $_POST['name'], $_POST['password']);
+            if ($result) {
+                $res->status = 'ok';
+            } else
+                $res->status = "fail";
+            return $res;
+        }
     }
 }
 
@@ -78,8 +77,10 @@ function get_staff()
     require_once("database/account_data.php");
     $res = new stdClass();
     if (array_key_exists('user_id', $_POST)) {
-        $res->status = "ok";
-        $res->staff = $account_data->get_staff($_POST['user_id']);
-        return $res;
+        if (trim($_POST['user_id'])) {
+            $res->status = "ok";
+            $res->staff = $account_data->get_staff($_POST['user_id']);
+            return $res;
+        }
     }
 }
