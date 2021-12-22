@@ -51,6 +51,20 @@ class Database{
         }
         return $array;
     }
+
+    protected function get_sub_type($type){
+        if($type == "A1"){
+            return "A2";
+        }elseif($type == "A2"){
+            return "A3";
+        }elseif($type == "A3"){
+            return "B1";
+        }elseif($type == "B1"){
+            return "B2";
+        }
+
+        return "non-type";
+    }
 }
 // $data = new Database();
 // $data -> get_connect();

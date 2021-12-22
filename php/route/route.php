@@ -14,7 +14,8 @@ class Router
         $commandArray = array_diff_assoc($requestURI, $scriptName);
         $commandArray = array_values($commandArray);
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "GET") {
+        // POST 
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // /account
             if (strtolower($commandArray[0]) == "account") {
                 
@@ -71,6 +72,30 @@ class Router
                     $fileName = 'citizen';
                     $controllerName = 'del_citizen';
                 }
+
+                // /citizen/city
+                if (strtolower($commandArray[1]) == "city") {
+                    $fileName = 'citizen';
+                    $controllerName = 'citizen_of_city';
+                }
+
+                // /citizen/district
+                if (strtolower($commandArray[1]) == "district") {
+                    $fileName = 'citizen';
+                    $controllerName = 'citizen_of_district';
+                }
+
+                // /citizen/commune
+                if (strtolower($commandArray[1]) == "commune") {
+                    $fileName = 'citizen';
+                    $controllerName = 'citizen_of_commune';
+                }
+
+                // /citizen/address
+                if (strtolower($commandArray[1]) == "address") {
+                    $fileName = 'citizen';
+                    $controllerName = 'citizen_of_address';
+                }
             }
 
             // /report
@@ -99,6 +124,18 @@ class Router
                 if (strtolower($commandArray[1]) == "delete") {
                     $fileName = "report";
                     $controllerName = 'del_report';
+                }
+
+                // /report/area
+                if (strtolower($commandArray[1]) == "area") {
+                    $fileName = "report";
+                    $controllerName = 'get_area';
+                }
+
+                // /report/complete
+                if (strtolower($commandArray[1]) == "complete") {
+                    $fileName = "report";
+                    $controllerName = 'make_complete';
                 }
             }
 
@@ -146,6 +183,30 @@ class Router
                 if (strtolower($commandArray[1]) == "addressfromcommune") {
                     $fileName = 'address';
                     $controllerName = 'get_address_from_commune';
+                }
+
+                // /address/addcity
+                if (strtolower($commandArray[1]) == "addcity") {
+                    $fileName = 'address';
+                    $controllerName = 'add_city';
+                }
+
+                // /address/addDistrict
+                if (strtolower($commandArray[1]) == "adddistrict") {
+                    $fileName = 'address';
+                    $controllerName = 'add_district';
+                }
+
+                // /address/addCommune
+                if (strtolower($commandArray[1]) == "addcommune") {
+                    $fileName = 'address';
+                    $controllerName = 'add_commune';
+                }
+
+                // /address/addAddress
+                if (strtolower($commandArray[1]) == "addaddress") {
+                    $fileName = 'address';
+                    $controllerName = 'add_address';
                 }
             }
 

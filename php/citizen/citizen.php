@@ -112,3 +112,39 @@ function del_citizen()
         }
     }
 }
+
+function citizen_of_city(){
+    require_once("database/citizen_data.php");
+    if (array_key_exists("city_id", $_POST)) {
+        if (trim($_POST["city_id"])) {
+            return $citizen->get_citizen_from_city($_POST["city_id"]);
+        }
+    }
+}
+
+function citizen_of_district(){
+    require_once("database/citizen_data.php");
+    if (array_key_exists("district_id", $_POST)) {
+        if (trim($_POST["district_id"])) {
+            return $citizen->get_citizen_from_district($_POST["district_id"]);
+        }
+    }
+}
+
+function citizen_of_commune(){
+    require_once("database/citizen_data.php");
+    if (array_key_exists("commune_id", $_POST)) {
+        if (trim($_POST["commune_id"])) {
+            return $citizen->get_citizen_from_commune($_POST["commune_id"]);
+        }
+    }
+}
+
+function citizen_of_address(){
+    require_once("database/citizen_data.php");
+    if (array_key_exists("address_id", $_POST)) {
+        if (trim($_POST["address_id"])) {
+            return $citizen->get_citizen_from_address1($_POST["address_id"]);
+        }
+    }
+}

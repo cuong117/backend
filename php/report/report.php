@@ -93,3 +93,28 @@ function del_report()
         }
     }
 }
+
+function get_area(){
+    require_once('database/report_data.php');
+    if (array_key_exists('report_id', $_POST) && array_key_exists('user_id', $_POST)) {
+        if (trim($_POST['report_id']) && trim($_POST['user_id'])) {
+            return $report->get_area($_POST['user_id'], $_POST['report_id']);
+        }
+    }
+}
+
+function make_complete(){
+    require_once('database/report_data.php');
+    if (array_key_exists('report_id', $_POST) && array_key_exists('user_id', $_POST)) {
+        if (trim($_POST['report_id']) && trim($_POST['user_id'])) {
+            $result = $report->completed($_POST['user_id'], $_POST['report_id']);
+            $res = new stdClass();
+            if($result){
+                $res->status = "ok";
+            }else{
+                $res->status = "fail";
+            }
+            return $res;
+        }
+    }
+}

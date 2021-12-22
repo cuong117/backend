@@ -8,7 +8,7 @@ class Account extends Database{
         return $this->connect->query($query);
     }
 
-    public function insert_user($acc, $user_id, $id){
+    public function insert_user($user_id, $id){
         $type = $this->type_of_user($user_id);
         if($type == "A1"){
             $type = "A2";
@@ -19,7 +19,7 @@ class Account extends Database{
         }elseif($type == "B1"){
             $type = "B2";
         }
-        $query = "insert into user (user_id, account, password, type, boss) values (NULL, '".$acc."', '123456', '".$type."', $user_id)";
+        $query = "insert into user (user_id, account, password, type, boss) values (NULL, '".$id."', '123456', '".$type."', $user_id)";
         $this->connect->query($query);
         
         $staff_id = $this->connect->query("SELECT max(u.user_id) id from user u;");

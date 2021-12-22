@@ -76,6 +76,49 @@ class Address extends Database
         $result = $this->connect->query($get_address);
         return $this->push_to_array($result);
     }
+
+    public function add_city($user_id, $city_id ,$city_name){
+        $type = $this->type_of_user($user_id);
+        if($type == "A1"){
+            $query = "INSERT INTO `city` (`city_id`, `name`) VALUES ('$city_id', '$city_name')";
+            return $this->connect->query($query);
+        }
+        return false;
+    }
+
+    public function add_district($user_id, $district_id ,$district_name, $city_id){
+        $type = $this->type_of_user($user_id);
+        if($type == "A2"){
+            $query = "INSERT INTO `district` (`district_id`, `name`, `city_id`) VALUES ('$district_id', '$district_name', '$city_id')";
+            return $this->connect->query($query);
+        }
+        return false;
+    }
+
+    public function add_commune($user_id, $commune_id ,$commune_name, $district_id){
+        $type = $this->type_of_user($user_id);
+        if($type == "A3"){
+            $query = "INSERT INTO `commune` (`commune_id`, `name`, `district_id`) VALUES ('$commune_id', '$commune_name', '$district_id')";
+            return $this->connect->query($query);
+        }
+        return false;
+    }
+
+    public function add_address($user_id, $address_id ,$address_name, $commune_id){
+        $type = $this->type_of_user($user_id);
+        if($type == "B1"){
+            $query = "INSERT INTO `address` (`address_id`, `name`, `commune_id`) VALUES ('$address_id', '$address_name', '$commune_id')";
+            return $this->connect->query($query);
+        }
+        return false;
+    }
+
+    public function del_city($user_id, $city_id){
+        $type = $this->type_of_user($user_id);
+        if($type == "A1"){
+            
+        }
+    }
 }
 
 $address = new Address();

@@ -29,12 +29,11 @@ function add_account()
     $success = true;
     if (
         array_key_exists('user_id', $_POST) &&
-        array_key_exists('account', $_POST) &&
         array_key_exists("id", $_POST)
     ) {
-        if (trim($_POST['account']) != "" && trim($_POST['id']) != "") {
-            if (!$account_data->check_user_exit($_POST['account'])) {
-                $result = $account_data->insert_user($_POST['account'], $_POST['user_id'], $_POST['id']);
+        if (trim($_POST['user_id']) != "" && trim($_POST['id']) != "") {
+            if (!$account_data->check_user_exit($_POST['id'])) {
+                $result = $account_data->insert_user($_POST['user_id'], $_POST['id']);   
                 if (!$result)
                     $success = false;
             } else {
